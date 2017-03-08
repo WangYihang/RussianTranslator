@@ -46,6 +46,7 @@ def main():
         # print line
         if r"<span class='class1'>" in line:
             line = line.replace("<span class='class1'>", "")
+            line = line.replace("<span class='class2'>", "")
             line = line.replace("</span>", "")
             line = line.replace("<li>", "")
             line = line.replace("</li>", "")

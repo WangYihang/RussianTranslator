@@ -1,0 +1,71 @@
+#!/usr/bin/env python
+# encoding:utf8
+from __future__ import print_function
+import os
+import sys
+import base64
+
+if sys.version_info[0] < 3:
+    from ConfigParser import SafeConfigParser
+else:
+    from configparser import ConfigParser as SafeConfigParser
+
+
+def getPath():
+    return sys.path[0]
+
+
+def get_config():
+    configParser = SafeConfigParser()
+    configParser.read("/opt/fy/Config/config.conf")
+    defaultModule = configParser.get("Global", "defaultModule")
+    return (configParser, defaultModule)
+
+
+def printHelp():
+    binName = sys.argv[0].split("/")[-1]
+    print("Usage : ")
+    print("\t {binName} [word]".format(binName=binName))
+    print("Example : ")
+    print("\t {binName} help".format(binName=binName))
+    print("\t {binName} 帮助".format(binName=binName))
+    print("\t {binName} \"help me\"".format(binName=binName))
+
+
+def getUserInput():
+    if len(sys.argv) != 2:
+        printHelp()
+        exit(1)
+    else:
+        return sys.argv[1]
+
+def checkLocal(word):
+    try:
+        for i in os.listdir(os.path.expandvars('$HOME')+"/.rufy/Cache/"):
+            if i == base64.b64encode(word):
+                return True
+        return False
+    except:
+        os.makedirs(os.path.expandvars('$HOME')+"/.rufy/Cache/")
+
+def printFileContent(path):
+    with open(path) as f:
+        for line in f:
+            print(line.replace("\n", ""))
+
+def main():
+    defaultModule = "Spider"
+    word = getUserInput()
+    if checkLocal(word):
+        print("[*]->使用本地缓存")
+        printFileContent(os.path.expandvars('$HOME')+"/.rufy/Cache/" + base64.b64encode(word))
+    else:
+        print ("[*]->使用在线查询")
+        command = 'python '+getPath()+'/Modules/{defaultModule}.py' \
+              ' \" {word} \"'.format(defaultModule=defaultModule,
+                                     word=word)
+        os.system(command)
+
+
+if __name__ == '__main__':
+    main()

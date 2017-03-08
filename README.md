@@ -1,7 +1,7 @@
 ---
 ####项目说明 : 
 终端俄语翻译工具
-> [项目地址](https://coding.net/u/yihangwang/p/PyTranslator/git/tree/release/)
+> [项目地址](https://coding.net/u/yihangwang/p/RussianTranslator/git)
 
 ---
 ####安装方法 :
@@ -14,7 +14,7 @@ sudo pip install bs4
 ``` 
 2. 克隆项目
 ```
-git clone https://git.coding.net/yihangwang/PyTranslator.git
+git clone https://git.coding.net/yihangwang/RussianTranslator.git
 cd PyTranslator
 git checkout release
 ```

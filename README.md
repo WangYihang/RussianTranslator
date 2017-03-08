@@ -5,20 +5,12 @@
 
 ---
 ####安装方法 :
-1. 安装Python第三方库
-```
-安装第三方python库
-sudo apt-get install python-pip
-sudo pip install requests
-sudo pip install bs4
-``` 
-2. 克隆项目
+1. 克隆项目
 ```
 git clone https://git.coding.net/yihangwang/RussianTranslator.git
 cd PyTranslator
-git checkout release
 ```
-3. 进行安装 
+2. 进行安装 
 ```
 sudo python Setup.py
 按照Setup.py中的指引就可以完成安装
